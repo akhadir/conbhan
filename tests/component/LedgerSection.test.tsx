@@ -14,7 +14,8 @@ describe('LedgerSection', () => {
     expect(screen.getByText('−50 Credits')).toBeInTheDocument();
     expect(screen.getByText('+100 Credits')).toBeInTheDocument();
     expect(screen.getByText('Cleared')).toBeInTheDocument();
-    expect(screen.getByText('Learn TypeScript')).toBeInTheDocument();
+    // Goal 2 owns four ledger rows, so the title is expected more than once.
+    expect(screen.getAllByText('Learn TypeScript')[0]).toBeInTheDocument();
   });
 
   it('groups month-wise with subtotals', async () => {
