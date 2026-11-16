@@ -100,6 +100,12 @@ describe('totals', () => {
     expect(totals.weightedCompletion).toBe(72.12);
     expect(totals.goalCompletionRate).toBe(33.33);
   });
+
+  it('computes the combined credits held by active goals', () => {
+    // Active goals: Learn TypeScript (750) + Run 100 km (40) = 790.
+    // The permanent default goal and the completed goal are excluded.
+    expect(totals.activeGoalsCredits).toBe(790);
+  });
 });
 
 describe('category breakdown', () => {

@@ -42,6 +42,8 @@ export interface Totals {
   allTimeEarned: number;
   allTimeNet: number;
   clearedCredits: number;
+  /** Combined credits held by the currently active goals (default + completed goals excluded). */
+  activeGoalsCredits: number;
   activeGoals: number;
   completedGoals: number;
   fixedGoals: number;
@@ -153,6 +155,14 @@ export function computeTotals(stats: GoalStats[]): Totals {
   const allTimeEarned = roundCredits(stats.reduce((sum, stat) => sum + stat.earned, 0));
   const allTimeNet = roundCredits(stats.reduce((sum, stat) => sum + stat.net, 0));
   const clearedCredits = roundCredits(stats.reduce((sum, stat) => sum + stat.cleared, 0));
+  const activeGoalsCredits = roundCredits(
+    stats.reduce((sum, stat) => {
+      const isDefault = stat.goal.isDefault === 1;
+      const completed = Boolean(stat.goal.completedAt);
+      if (isDefault || completed) return sum;
+      return sum + stat.active;
+    }, 0),
+  );
 
   const candidates = stats.filter((stat) => stat.goal.isDefault !== 1);
   const completedGoals = candidates.filter((stat) => Boolean(stat.goal.completedAt)).length;
@@ -169,6 +179,7 @@ export function computeTotals(stats: GoalStats[]): Totals {
     allTimeEarned,
     allTimeNet,
     clearedCredits,
+    activeGoalsCredits,
     activeGoals,
     completedGoals,
     fixedGoals,

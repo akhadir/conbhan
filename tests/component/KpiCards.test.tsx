@@ -28,4 +28,10 @@ describe('KpiCards', () => {
     render(<KpiCards totals={totals} filtered />);
     expect(screen.getByText(/filtered/i)).toBeInTheDocument();
   });
+
+  it('renders the combined total of credits held by active goals', () => {
+    render(<KpiCards totals={totals} />);
+    expect(screen.getByText(/active goal total/i)).toBeInTheDocument();
+    expect(screen.getByText('790 Credits')).toBeInTheDocument();
+  });
 });

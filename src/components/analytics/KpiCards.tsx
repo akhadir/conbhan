@@ -26,6 +26,11 @@ export function KpiCards({ totals, filtered = false }: KpiCardsProps) {
           <p className="kpi-note">{totals.completedGoals} completed</p>
         </div>
         <div className="kpi-card">
+          <p className="kpi-label">Active goal total</p>
+          <p className="kpi-value">{formatCredits(totals.activeGoalsCredits)}</p>
+          <p className="kpi-note">Combined credits across open goals</p>
+        </div>
+        <div className="kpi-card">
           <p className="kpi-label">Overall completion</p>
           <p className="kpi-value">{`${roundCredits(totals.weightedCompletion)}%`}</p>
           <p className="kpi-note">
