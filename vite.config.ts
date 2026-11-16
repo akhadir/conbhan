@@ -9,5 +9,6 @@ export default defineConfig({
   build: {
     outDir: 'docs',
     emptyOutDir: true,
+    manifest: 'assets/manifest.json',
   },
 });
