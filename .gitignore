@@ -1,9 +1,0 @@
-node_modules/
-dist/
-.vite/
-test-results/
-playwright-report/
-blob-report/
-playwright/.cache/
-*.local
-.DS_Store
