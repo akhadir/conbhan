@@ -16,19 +16,14 @@ export function KpiCards({ totals, filtered = false }: KpiCardsProps) {
           <p className="kpi-note">Available to debit right now</p>
         </div>
         <div className="kpi-card">
-          <p className="kpi-label">All-time credits earned</p>
-          <p className="kpi-value">{formatCredits(totals.allTimeEarned)}</p>
-          <p className="kpi-note">{formatCredits(totals.clearedCredits)} cleared</p>
+          <p className="kpi-label">Total Credits of Active Goals</p>
+          <p className="kpi-value">{formatCredits(totals.activeGoalsCredits)}</p>
+          <p className="kpi-note">Combined credits across open goals</p>
         </div>
         <div className="kpi-card">
           <p className="kpi-label">Active goals</p>
           <p className="kpi-value">{totals.activeGoals} active</p>
           <p className="kpi-note">{totals.completedGoals} completed</p>
-        </div>
-        <div className="kpi-card">
-          <p className="kpi-label">Active goal total</p>
-          <p className="kpi-value">{formatCredits(totals.activeGoalsCredits)}</p>
-          <p className="kpi-note">Combined credits across open goals</p>
         </div>
         <div className="kpi-card">
           <p className="kpi-label">Overall completion</p>

@@ -79,7 +79,7 @@ describe('registration', () => {
 
     const registration = await registerServiceWorker(container, '/conbhan/');
 
-    expect(register).toHaveBeenCalledWith('/conbhan/sw.js', { scope: '/conbhan/' });
+    expect(register).toHaveBeenCalledWith('/conbhan/sw.js', { scope: '/conbhan/', updateViaCache: 'none' });
     expect(registration).toEqual({ scope: '/conbhan/' });
   });
 
@@ -89,7 +89,7 @@ describe('registration', () => {
 
     await registerServiceWorker(container);
 
-    expect(register).toHaveBeenCalledWith('/sw.js', { scope: '/' });
+    expect(register).toHaveBeenCalledWith('/sw.js', { scope: '/', updateViaCache: 'none' });
   });
 
   it('is a no-op in browsers without service worker support', async () => {

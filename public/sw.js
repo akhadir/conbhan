@@ -31,7 +31,7 @@ self.addEventListener('fetch', (event) => {
 
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
+      fetch(request, { cache: 'no-store' })
         .then((response) => response)
         .catch(async () => {
           const cached = await caches.match('./index.html');

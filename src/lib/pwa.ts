@@ -1,5 +1,6 @@
 interface RegisterOptions {
   scope: string;
+  updateViaCache: 'none' | 'imports' | 'all';
 }
 
 interface RegisterResult {
@@ -16,8 +17,9 @@ interface ServiceWorkerContainer {
 
 /**
  * Registers the Conbhan service worker for the current origin and scope.
- * Returns null when unsupported (non-secure context) or when registration fails,
- * so the app keeps working as a plain website in those cases.
+ * `updateViaCache: 'none'` forces the browser to re-check sw.js on every load
+ * instead of serving a stale copy from the HTTP cache, so deployed updates reach
+ * installed PWAs promptly instead of showing a blank page on refresh.
  */
 export async function registerServiceWorker(
   container: ServiceWorkerContainer = typeof navigator !== 'undefined' ? navigator : {},
@@ -28,7 +30,10 @@ export async function registerServiceWorker(
   if (!register) return null;
 
   try {
-    const registration = await serviceWorker!.register(`${baseUrl}sw.js`, { scope: baseUrl });
+    const registration = await serviceWorker!.register(`${baseUrl}sw.js`, {
+      scope: baseUrl,
+      updateViaCache: 'none',
+    });
     return registration;
   } catch (error) {
     console.warn('Conbhan service worker registration failed', error);
